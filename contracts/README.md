@@ -5,11 +5,11 @@
 
 ## 技术栈
 - **编程语言**: Solidity 0.8.x
-- **开发框架**: Hardhat 或 Foundry (待选)
-- **测试框架**: Hardhat测试 / Foundry测试 / Waffle
+- **开发框架**: Foundry
+- **测试框架**: Foundry测试
 - **安全工具**: Slither, MythX, Echidna
 - **代码质量**: Solhint, Prettier
-- **部署工具**: Hardhat部署脚本 / 可升级合约代理
+- **部署工具**: Foundry部署脚本 / 可升级合约代理
 - **标准库**: OpenZeppelin Contracts
 - **网络**: Ethereum, Polygon, Arbitrum, Optimism 或本地测试网
 
@@ -27,7 +27,7 @@ contracts/
 ├── scripts/              # 部署和管理脚本
 │   ├── deploy/          # 部署脚本
 │   ├── upgrade/         # 升级脚本
-│   └── tasks/           # Hardhat任务
+│   └── tasks/           # Foundry任务
 ├── test/                # 测试文件
 │   ├── unit/           # 单元测试
 │   ├── integration/    # 集成测试
@@ -62,8 +62,8 @@ contracts/
 - 使用 `npm run compile` 或 `forge build` 编译合约
 - 使用 `npm run test` 或 `forge test` 运行测试
 - 使用 `npm run deploy` 或部署脚本部署合约
-- 需要配置网络环境 (hardhat.config.js 或 foundry.toml)
-- 支持本地测试网 (Hardhat Network) 和公共测试网
+- 需要配置网络环境 (foundry.toml)
+- 支持本地测试网 (Foundry本地节点) 和公共测试网
 
 ## 依赖关系
 - 依赖于OpenZeppelin合约库

@@ -40,7 +40,7 @@
 0g-vibe-coding-session/
 ├── frontend/              # 前端DApp (React + TypeScript + Vite)
 ├── backend/              # 后端API服务 (Node.js + TypeScript)
-├── contracts/            # 智能合约 (Solidity + Hardhat/Foundry)
+├── contracts/            # 智能合约 (Solidity + Foundry)
 ├── docs/                 # 项目文档
 ├── scripts/              # 通用脚本
 ├── config/               # 配置文件
@@ -71,7 +71,7 @@
 - **详细说明**: [backend/README.md](backend/README.md)
 
 ### 3. 智能合约项目 (`contracts/`)
-- **技术栈**: Solidity + Hardhat/Foundry
+- **技术栈**: Solidity + Foundry
 - **功能**: 区块链业务逻辑、代币、治理等
 - **详细说明**: [contracts/README.md](contracts/README.md)
 
@@ -99,11 +99,11 @@
 - **npm** 或 **yarn**: 包管理
 - **Git**: 版本控制
 - **Docker** (可选): 容器化部署
-- **区块链工具**: Hardhat/Foundry, MetaMask等
+- **区块链工具**: Foundry, MetaMask等
 
 ### 开发工具要求
 - **代码编辑器**: VS Code 或其他现代编辑器
-- **区块链开发工具**: Hardhat 或 Foundry
+- **区块链开发工具**: Foundry
 - **以太坊钱包**: MetaMask 扩展
 - **0G测试网节点**: 用于部署和测试
 
