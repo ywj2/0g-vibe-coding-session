@@ -74,3 +74,7 @@ bash
 # 查看指定地址余额（默认 Wei）
 cast balance $ADDRESS --rpc-url $RPC_URL
 
+forge script script/GoldPriceForecast.s.sol:GoldPriceForecastScript --rpc-url $RPC_URL --private-key $PRIVATE_KEY --broadcast
+
+
+
