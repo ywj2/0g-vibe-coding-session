@@ -30,40 +30,35 @@ export function Profile() {
 
   if (!isConnected) {
     return (
-      <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 shadow-2xl mb-8 max-w-md w-full">
-        <h2 className="text-xl font-bold mb-4 text-white">Connect Wallet</h2>
-        <p className="text-gray-300 mb-4">Connect your wallet to interact with the app</p>
+      <div className="flex justify-end">
         <button
           onClick={handleConnect}
           disabled={isPending}
-          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 w-full disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-2 px-4 transition-all duration-300 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
         >
           {isPending ? 'Connecting...' : 'Connect Wallet'}
         </button>
         {connectError && (
-          <p className="mt-3 text-red-400 text-sm">Error: {connectError.message}</p>
+          <span className="text-red-400 text-xs ml-2">Error: {connectError.message}</span>
         )}
       </div>
     )
   }
 
-  // Connected state
+  // Connected state - show address and disconnect button in one line
+  const formattedAddress = address ? `${address.slice(0, 6)}...${address.slice(-4)}` : ''
+  
   return (
-    <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 shadow-2xl mb-8 max-w-md w-full">
-      <h2 className="text-xl font-bold mb-4 text-white">Wallet Connected</h2>
-      
-      <div className="mb-6">
-        <p className="text-gray-400 text-sm mb-1">Address</p>
-        <p className="text-white font-mono text-sm bg-gray-900 p-3 rounded break-all">
-          {address}
-        </p>
+    <div className="flex justify-end items-center gap-3 bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm p-3">
+      <div className="flex items-center gap-2">
+        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+        <span className="text-gray-300 text-sm font-mono">{formattedAddress}</span>
       </div>
-
       <button
         onClick={handleDisconnect}
-        className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 w-full"
+        className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-semibold py-2 px-4 transition-all duration-300 hover:scale-105 active:scale-95 whitespace-nowrap text-sm"
       >
-        Disconnect Wallet
+        Disconnect
       </button>
     </div>
   )
