@@ -57,7 +57,7 @@ cd 0g-vibe-coding-session
 
 ### 2. 了解项目结构
 - 查看 `WORKSPACE_OVERVIEW.md` 了解整体架构
-- 阅读各项目的 `PROJECT_DESCRIPTION.md` 了解详细信息
+- 阅读各项目的 `README.md` 了解详细信息
 
 ### 3. 选择开发方向
 根据活动要求，可以选择以下方向：
@@ -72,17 +72,17 @@ cd 0g-vibe-coding-session
 ### 前端项目 (`frontend/`)
 - **技术栈**: React 19 + TypeScript + Vite + Wagmi + Viem
 - **功能**: 用户界面、钱包连接、合约交互
-- **详细说明**: [frontend/PROJECT_DESCRIPTION.md](frontend/PROJECT_DESCRIPTION.md)
+- **详细说明**: [frontend/README.md](frontend/README.md)
 
 ### 后端项目 (`backend/`)
 - **技术栈**: Node.js + TypeScript + Express/Nest.js
 - **功能**: API服务、区块链桥接、数据处理
-- **详细说明**: [backend/PROJECT_DESCRIPTION.md](backend/PROJECT_DESCRIPTION.md)
+- **详细说明**: [backend/README.md](backend/README.md)
 
 ### 智能合约项目 (`contracts/`)
 - **技术栈**: Solidity + Hardhat/Foundry + OpenZeppelin
 - **功能**: 区块链业务逻辑、代币、治理等
-- **详细说明**: [contracts/PROJECT_DESCRIPTION.md](contracts/PROJECT_DESCRIPTION.md)
+- **详细说明**: [contracts/README.md](contracts/README.md)
 
 ## 🛠️ 开发工具要求
 

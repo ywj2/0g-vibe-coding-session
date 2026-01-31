@@ -31,17 +31,17 @@
 ### 1. 前端项目 (`frontend/`)
 - **技术**: React 19 + TypeScript + Vite
 - **功能**: 用户界面、钱包连接、合约交互
-- **详细描述**: 参见 `frontend/PROJECT_DESCRIPTION.md`
+- **详细描述**: 参见 `frontend/README.md`
 
 ### 2. 后端项目 (`backend/`)
 - **技术**: Node.js + TypeScript + Express/Nest.js
 - **功能**: API服务、区块链桥接、数据处理
-- **详细描述**: 参见 `backend/PROJECT_DESCRIPTION.md`
+- **详细描述**: 参见 `backend/README.md`
 
 ### 3. 智能合约项目 (`contracts/`)
 - **技术**: Solidity + Hardhat/Foundry
 - **功能**: 区块链业务逻辑、代币、治理等
-- **详细描述**: 参见 `contracts/PROJECT_DESCRIPTION.md`
+- **详细描述**: 参见 `contracts/README.md`
 
 ## 开发工作流
 
@@ -79,7 +79,7 @@
 ## AI开发指南
 
 ### 快速开始
-1. **了解需求**: 阅读本文件和各项目的PROJECT_DESCRIPTION.md
+1. **了解需求**: 阅读本文件和各项目的README.md
 2. **选择技术栈**: 根据项目描述选择具体技术 (如选择Express还是Nest.js)
 3. **创建基础结构**: 按照目录结构创建必要的文件和文件夹
 4. **实现核心功能**: 按照功能描述实现具体逻辑
