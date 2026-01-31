@@ -1,11 +1,11 @@
-import { useAccount, useConfig } from 'wagmi'
+import { useConnection, useConfig } from 'wagmi'
 import { connect, disconnect } from 'wagmi/actions'
 import { injected } from 'wagmi/connectors'
 import { useState } from 'react'
 
 export function Profile() {
   const config = useConfig()
-  const { address, isConnected } = useAccount()
+  const { address } = useConnection()
   const [connectError, setConnectError] = useState<Error | null>(null)
   const [isPending, setIsPending] = useState(false)
 
@@ -24,6 +24,9 @@ export function Profile() {
   const handleDisconnect = async () => {
     await disconnect(config)
   }
+
+  // Check if address exists to determine connection status
+  const isConnected = !!address
 
   if (!isConnected) {
     return (
