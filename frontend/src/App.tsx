@@ -6,6 +6,7 @@ import { WagmiProvider } from 'wagmi'
 import { config } from './config'
 import { Profile } from './components/profile'
 import { GoldChart } from './components/gold-chart'
+import { NewsFeed } from './components/news-feed'
 
 const queryClient = new QueryClient()
 
@@ -17,14 +18,21 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Profile />
         <div className="h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col items-center p-8 overflow-auto">
-          <div className="w-full max-w-4xl mb-4">
+          <div className="w-full max-w-6xl mb-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
               专注黄金价格走势去中心AI
             </h2>
             <p className="text-gray-400 text-lg">实时追踪黄金市场价格动态</p>
           </div>
-          <div className="w-full max-w-4xl mb-8">
-            <GoldChart />
+          <div className="w-full max-w-6xl mb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="h-full">
+                <GoldChart />
+              </div>
+              <div className="h-full">
+                <NewsFeed />
+              </div>
+            </div>
           </div>
           <div className="flex flex-wrap gap-8 justify-center items-center mb-12">
             <a href="https://vite.dev" target="_blank" className="group">
