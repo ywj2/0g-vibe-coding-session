@@ -17,15 +17,15 @@ function App() {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <Profile />
-        <div className="h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col items-center p-8 overflow-auto">
-          <div className="w-full max-w-6xl mb-4">
-            <h2 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
+        <div className="h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col items-center p-4 md:p-8 overflow-auto">
+          <div className="w-full max-w-5xl mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent">
               专注黄金价格走势去中心AI
             </h2>
-            <p className="text-gray-400 text-lg">实时追踪黄金市场价格动态</p>
+            <p className="text-gray-400 text-sm md:text-lg">实时追踪黄金市场价格动态</p>
           </div>
-          <div className="w-full max-w-6xl mb-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="w-full max-w-5xl mb-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div className="h-full">
                 <GoldChart />
               </div>
