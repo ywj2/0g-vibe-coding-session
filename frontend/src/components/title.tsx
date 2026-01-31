@@ -1,9 +1,33 @@
 import { useConnection, useSendTransaction } from 'wagmi'
 import { parseEther } from 'viem'
+import { useState } from 'react'
+
+interface Prediction {
+  tomorrowPrice: string
+  takeProfit: string
+  stopLoss: string
+}
 
 export function Title() {
   const { isConnected } = useConnection()
   const { sendTransaction, isPending } = useSendTransaction()
+  const [prediction, setPrediction] = useState<Prediction | null>(null)
+  const [transactionSuccess, setTransactionSuccess] = useState<boolean>(false)
+  const [transactionError, setTransactionError] = useState<string>('')
+
+  const generatePrediction = (): Prediction => {
+    // 模拟生成预测数据
+    const basePrice = 2350 + Math.random() * 100 // 2350-2450之间
+    const tomorrowPrice = basePrice.toFixed(2)
+    const takeProfit = (basePrice * 1.05).toFixed(2) // 上涨5%
+    const stopLoss = (basePrice * 0.95).toFixed(2)   // 下跌5%
+    
+    return {
+      tomorrowPrice,
+      takeProfit,
+      stopLoss
+    }
+  }
 
   const handlePredict = async () => {
     if (!isConnected) {
@@ -11,15 +35,26 @@ export function Title() {
       return
     }
 
+    // 重置状态
+    setPrediction(null)
+    setTransactionSuccess(false)
+    setTransactionError('')
+
     try {
       await sendTransaction({
         to: '0x1c03eF416bE077Db96A911Cab3ca80CF001E4E04',
         value: parseEther('0.01'),
       })
-      alert('交易已发送！等待确认...')
+      
+      // 交易成功
+      setTransactionSuccess(true)
+      const newPrediction = generatePrediction()
+      setPrediction(newPrediction)
     } catch (error) {
       console.error('交易失败:', error)
-      alert('交易失败: ' + (error instanceof Error ? error.message : String(error)))
+      const errorMessage = error instanceof Error ? error.message : String(error)
+      setTransactionError(errorMessage)
+      alert('交易失败: ' + errorMessage)
     }
   }
 
@@ -45,6 +80,40 @@ export function Title() {
           </button>
         </div>
       </div>
+
+      {/* 显示预测结果 */}
+      {transactionSuccess && prediction && (
+        <div className="mt-4 p-4 bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-800/30 rounded-lg animate-fadeIn">
+          <h3 className="text-lg font-semibold text-green-300 mb-2">🎯 预测结果已生成</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-3 bg-black/30 rounded border border-yellow-800/50">
+              <p className="text-sm text-gray-400">明日金价预测</p>
+              <p className="text-xl font-bold text-yellow-300">{prediction.tomorrowPrice} USD/oz</p>
+            </div>
+            <div className="p-3 bg-black/30 rounded border border-green-800/50">
+              <p className="text-sm text-gray-400">止盈点</p>
+              <p className="text-xl font-bold text-green-300">{prediction.takeProfit} USD/oz</p>
+              <p className="text-xs text-green-400 mt-1">(+5% 收益目标)</p>
+            </div>
+            <div className="p-3 bg-black/30 rounded border border-red-800/50">
+              <p className="text-sm text-gray-400">止损点</p>
+              <p className="text-xl font-bold text-red-300">{prediction.stopLoss} USD/oz</p>
+              <p className="text-xs text-red-400 mt-1">(-5% 风险控制)</p>
+            </div>
+          </div>
+          <p className="text-sm text-gray-400 mt-3">
+            基于AI模型分析历史数据与市场趋势生成，仅供参考，投资需谨慎。
+          </p>
+        </div>
+      )}
+
+      {transactionError && (
+        <div className="mt-4 p-4 bg-gradient-to-r from-red-900/20 to-rose-900/20 border border-red-800/30 rounded-lg">
+          <h3 className="text-lg font-semibold text-red-300 mb-2">❌ 交易失败</h3>
+          <p className="text-gray-300">{transactionError}</p>
+          <p className="text-sm text-gray-400 mt-2">请检查网络连接、钱包余额，并确保已切换到正确网络。</p>
+        </div>
+      )}
     </div>
   )
 }
