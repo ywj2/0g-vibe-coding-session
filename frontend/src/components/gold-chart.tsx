@@ -14,10 +14,15 @@ const generateGoldPriceData = () => {
     const fluctuation = (Math.random() - 0.5) * 40
     const price = basePrice + fluctuation
     
+    // AI预测价格 - 在实际价格附近波动，但稍有差异
+    const aiFluctuation = (Math.random() - 0.5) * 25 // 比实际波动小一些
+    const aiPrediction = price + aiFluctuation
+    
     data.push({
       date: date.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' }),
       fullDate: date.toISOString().split('T')[0],
       price: Math.round(price * 100) / 100,
+      aiPrediction: Math.round(aiPrediction * 100) / 100,
       high: Math.round((price + Math.random() * 10) * 100) / 100,
       low: Math.round((price - Math.random() * 10) * 100) / 100
     })
@@ -70,12 +75,14 @@ export function GoldChart() {
                 color: '#F9FAFB'
               }}
               labelStyle={{ color: '#D1D5DB', fontWeight: 'bold' }}
-              formatter={(value: number | undefined) => [`$${(value || 0).toFixed(2)}`, '价格']}
+              formatter={(value: number | undefined, name: string | undefined) => {
+                const label = name === 'price' ? '实际价格' : name === 'aiPrediction' ? 'AI预测' : name || '价格'
+                return [`$${(value || 0).toFixed(2)}`, label]
+              }}
               labelFormatter={(label) => `日期: ${label}`}
             />
             <Legend 
               wrapperStyle={{ paddingTop: '5px', fontSize: '12px' }}
-              formatter={() => '黄金价格'}
             />
             <Line
               type="monotone"
@@ -84,7 +91,17 @@ export function GoldChart() {
               strokeWidth={2.5}
               dot={{ stroke: '#FBBF24', strokeWidth: 1.5, r: 3 }}
               activeDot={{ r: 5, stroke: '#F59E0B', strokeWidth: 2, fill: '#FBBF24' }}
-              name="黄金价格"
+              name="实际价格"
+            />
+            <Line
+              type="monotone"
+              dataKey="aiPrediction"
+              stroke="#60A5FA"
+              strokeWidth={2}
+              strokeDasharray="5 5"
+              dot={{ stroke: '#60A5FA', strokeWidth: 1, r: 2 }}
+              activeDot={{ r: 4, stroke: '#3B82F6', strokeWidth: 1.5, fill: '#60A5FA' }}
+              name="AI历史预测"
             />
           </LineChart>
         </ResponsiveContainer>
