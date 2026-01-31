@@ -2,13 +2,13 @@
 pragma solidity ^0.8.13;
 
 import {Test} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
+import {GoldPriceForecast} from "../src/GoldPriceForecast.sol";
 
-contract CounterTest is Test {
-    Counter public counter;
+contract GoldPriceForecastTest is Test {
+    GoldPriceForecast public counter;
 
     function setUp() public {
-        counter = new Counter();
+        counter = new GoldPriceForecast();
         counter.setNumber(0);
     }
 
