@@ -1,11 +1,10 @@
-import { useAccount, useConnect, useDisconnect, useEnsName } from 'wagmi'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import { injected } from 'wagmi/connectors'
 
 export function Profile() {
   const { address, isConnected } = useAccount()
-  const { connect, connectors, error: connectError, isPending } = useConnect()
+  const { connect, error: connectError, isPending } = useConnect()
   const { disconnect } = useDisconnect()
-  const { data: ensName, error: ensError, status: ensStatus } = useEnsName({ address })
 
   if (!isConnected) {
     return (
@@ -31,35 +30,12 @@ export function Profile() {
     <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 border border-gray-700 shadow-2xl mb-8 max-w-md w-full">
       <h2 className="text-xl font-bold mb-4 text-white">Wallet Connected</h2>
       
-      <div className="mb-4">
+      <div className="mb-6">
         <p className="text-gray-400 text-sm mb-1">Address</p>
         <p className="text-white font-mono text-sm bg-gray-900 p-3 rounded break-all">
           {address}
         </p>
       </div>
-
-      {ensStatus === 'pending' && (
-        <div className="mb-4">
-          <p className="text-gray-400 text-sm mb-1">ENS Name</p>
-          <p className="text-gray-300">Loading ENS name...</p>
-        </div>
-      )}
-
-      {ensStatus === 'success' && ensName && (
-        <div className="mb-4">
-          <p className="text-gray-400 text-sm mb-1">ENS Name</p>
-          <p className="text-white font-mono text-sm bg-gray-900 p-3 rounded break-all">
-            {ensName}
-          </p>
-        </div>
-      )}
-
-      {ensStatus === 'error' && (
-        <div className="mb-4">
-          <p className="text-gray-400 text-sm mb-1">ENS Name</p>
-          <p className="text-red-400 text-sm">Error fetching ENS name: {ensError?.message}</p>
-        </div>
-      )}
 
       <button
         onClick={() => disconnect()}
