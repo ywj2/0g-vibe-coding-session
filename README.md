@@ -35,6 +35,7 @@
 
 ## 🏗️ 项目架构
 
+### 整体架构
 ```
 0g-vibe-coding-session/
 ├── frontend/              # 前端DApp (React + TypeScript + Vite)
@@ -43,59 +44,96 @@
 ├── docs/                 # 项目文档
 ├── scripts/              # 通用脚本
 ├── config/               # 配置文件
-├── README.md             # 本文件
-└── WORKSPACE_OVERVIEW.md # 详细工作区说明
+└── LICENSE               # 许可证文件
 ```
 
-## 🚀 快速开始
-
-### 1. 克隆仓库
-```bash
-git clone https://github.com/ywj2/0g-vibe-coding-session.git
-cd 0g-vibe-coding-session
+### 组件间关系
+```
+前端 (Frontend) ← HTTP/WebSocket → 后端 (Backend) ← RPC/Web3 → 区块链网络
+    ↓                                      ↓
+用户界面                             业务逻辑层
+    ↓                                      ↓
+钱包交互                             数据存储
+    ↖                                ↗
+      智能合约 (Contracts)
 ```
 
-### 2. 了解项目结构
-- 查看 `WORKSPACE_OVERVIEW.md` 了解整体架构
-- 阅读各项目的 `README.md` 了解详细信息
+## 📁 各项目详细说明
 
-### 3. 选择开发方向
-根据活动要求，可以选择以下方向：
-- **Agent原生支付基础设施**: 开发基于0G的支付协议和智能合约
-- **去中心化AI Trading Arena**: 构建去中心化的AI交易竞技场
-
-### 4. 开始开发
-每个项目目录都提供了详细的技术栈说明和开发指南。
-
-## 📁 详细文档
-
-### 前端项目 (`frontend/`)
-- **技术栈**: React 19 + TypeScript + Vite + Wagmi + Viem
+### 1. 前端项目 (`frontend/`)
+- **技术栈**: React 19 + TypeScript + Vite
 - **功能**: 用户界面、钱包连接、合约交互
 - **详细说明**: [frontend/README.md](frontend/README.md)
 
-### 后端项目 (`backend/`)
+### 2. 后端项目 (`backend/`)
 - **技术栈**: Node.js + TypeScript + Express/Nest.js
 - **功能**: API服务、区块链桥接、数据处理
 - **详细说明**: [backend/README.md](backend/README.md)
 
-### 智能合约项目 (`contracts/`)
-- **技术栈**: Solidity + Hardhat/Foundry + OpenZeppelin
+### 3. 智能合约项目 (`contracts/`)
+- **技术栈**: Solidity + Hardhat/Foundry
 - **功能**: 区块链业务逻辑、代币、治理等
 - **详细说明**: [contracts/README.md](contracts/README.md)
 
-## 🛠️ 开发工具要求
+## 🚀 开发工作流
+
+### 1. 智能合约开发流程
+```
+编写合约 → 编译测试 → 部署到测试网 → 前端集成
+```
+
+### 2. 后端开发流程
+```
+设计API → 实现业务逻辑 → 连接数据库 → 集成区块链交互
+```
+
+### 3. 前端开发流程
+```
+设计UI → 实现组件 → 集成Web3 → 连接后端API
+```
+
+## ⚙️ 环境配置要求
 
 ### 必要工具
 - **Node.js**: v18+ (推荐v20+)
 - **npm** 或 **yarn**: 包管理
 - **Git**: 版本控制
-- **代码编辑器**: VS Code 或其他现代编辑器
+- **Docker** (可选): 容器化部署
+- **区块链工具**: Hardhat/Foundry, MetaMask等
 
-### 区块链开发工具
-- **Hardhat** 或 **Foundry**: 智能合约开发框架
-- **MetaMask**: 以太坊钱包扩展
+### 开发工具要求
+- **代码编辑器**: VS Code 或其他现代编辑器
+- **区块链开发工具**: Hardhat 或 Foundry
+- **以太坊钱包**: MetaMask 扩展
 - **0G测试网节点**: 用于部署和测试
+
+### 环境变量
+每个子项目都有自己的 `.env` 配置文件，需要根据具体需求配置：
+- 数据库连接字符串
+- 区块链RPC节点URL
+- API密钥和秘钥
+- 合约地址
+
+## 🤖 AI开发指南
+
+### 快速开始
+1. **了解需求**: 阅读本文件和各项目的README.md
+2. **选择技术栈**: 根据项目描述选择具体技术 (如选择Express还是Nest.js)
+3. **创建基础结构**: 按照目录结构创建必要的文件和文件夹
+4. **实现核心功能**: 按照功能描述实现具体逻辑
+5. **测试集成**: 确保各组件能够正确交互
+
+### 常见开发任务
+- **添加新功能**: 在相应项目的目录结构中添加模块
+- **修改现有功能**: 参考现有架构进行修改
+- **调试问题**: 检查组件间接口和数据流
+- **优化性能**: 针对区块链交互、数据库查询等进行优化
+
+### 注意事项
+1. 保持各项目间的接口一致性
+2. 遵循区块链安全最佳实践
+3. 确保错误处理和日志记录
+4. 考虑Gas优化和交易成本
 
 ## 📝 项目提交要求
 
@@ -112,6 +150,20 @@ cd 0g-vibe-coding-session
 3. 简短的项目说明文档
 4. 演示视频或截图（可选）
 
+## 📈 扩展建议
+
+### 可选组件
+1. **监控系统**: 应用性能监控
+2. **分析工具**: 区块链数据分析
+3. **管理面板**: 后台管理系统
+4. **移动端应用**: React Native或Flutter
+
+### 部署选项
+1. **传统部署**: VPS/云服务器
+2. **容器化**: Docker + Kubernetes
+3. **Serverless**: AWS Lambda, Vercel等
+4. **去中心化**: IPFS, Arweave等
+
 ## 🤝 参与贡献
 
 1. Fork 本仓库
@@ -124,10 +176,14 @@ cd 0g-vibe-coding-session
 
 本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情
 
-## 📞 联系方式
+## 📞 联系方式与维护
 
 - **GitHub**: [ywj2](https://github.com/ywj2)
 - **仓库地址**: https://github.com/ywj2/0g-vibe-coding-session
+- **项目状态**: 初始创建阶段
+- **最后更新**: 2026年1月31日
+- **维护者**: AI开发助手
+- **更新方式**: 根据需求迭代更新描述文件
 
 ---
 
