@@ -1,50 +1,73 @@
-# 前端项目 - Blockchain DApp
+# React + TypeScript + Vite
 
-## 项目概述
-这是一个基于React + TypeScript + Vite的区块链DApp前端应用。主要用于与智能合约交互，展示区块链数据，提供用户友好的Web3体验。
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 技术栈
-- **框架**: React 19 + TypeScript
-- **构建工具**: Vite 5
-- **状态管理**: React Hooks + Zustand (待选)
-- **Web3库**: Wagmi + Viem
-- **网络请求**: TanStack Query
-- **UI组件**: 待定 (可选用 Ant Design, Chakra UI, 或自定义)
-- **样式**: Tailwind CSS 或 Styled Components (待选)
-- **钱包集成**: MetaMask, WalletConnect, Coinbase Wallet
+Currently, two official plugins are available:
 
-## 目录结构
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## React Compiler
+
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-frontend/
-├── src/
-│   ├── components/     # 可复用组件
-│   ├── pages/         # 页面组件
-│   ├── hooks/         # 自定义hooks (含Web3 hooks)
-│   ├── utils/         # 工具函数 (区块链相关)
-│   ├── services/      # API服务层
-│   ├── stores/        # 状态管理
-│   ├── types/         # TypeScript类型定义
-│   ├── styles/        # 全局样式
-│   ├── assets/        # 静态资源
-│   └── App.tsx        # 主应用组件
-├── public/            # 公共资源
-└── config/            # 配置文件
+
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-## 核心功能
-1. **钱包连接**: 支持多种Web3钱包连接
-2. **合约交互**: 调用智能合约的读写操作
-3. **交易管理**: 发起、查看、确认交易
-4. **数据展示**: 区块链数据可视化展示
-5. **用户认证**: Web3身份验证
-6. **通知系统**: 交易状态通知
-
-## 开发说明
-- 使用 `npm run dev` 启动开发服务器 (端口: 3000)
-- 使用 `npm run build` 构建生产版本
-- 需要配置环境变量 (.env) 设置RPC节点和合约地址
-
-## 依赖关系
-- 依赖于后端API获取非区块链数据
-- 依赖于智能合约地址和ABI
-- 需要连接到的区块链网络 (如Ethereum, Polygon, 或本地测试网)
