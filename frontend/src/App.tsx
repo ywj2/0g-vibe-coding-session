@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { WagmiProvider } from 'wagmi'
 import { config } from './config'
 import { Profile } from './components/profile'
+import { GoldChart } from './components/gold-chart'
 
 const queryClient = new QueryClient()
 
@@ -16,6 +17,9 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <Profile />
         <div className="h-screen bg-gradient-to-br from-gray-900 to-black text-white flex flex-col items-center p-8 overflow-auto">
+          <div className="w-full max-w-4xl mb-8">
+            <GoldChart />
+          </div>
           <div className="flex flex-wrap gap-8 justify-center items-center mb-12">
             <a href="https://vite.dev" target="_blank" className="group">
               <img 
