@@ -1,10 +1,29 @@
-import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { useAccount, useConfig } from 'wagmi'
+import { connect, disconnect } from 'wagmi/actions'
 import { injected } from 'wagmi/connectors'
+import { useState } from 'react'
 
 export function Profile() {
+  const config = useConfig()
   const { address, isConnected } = useAccount()
-  const { connect, error: connectError, isPending } = useConnect()
-  const { disconnect } = useDisconnect()
+  const [connectError, setConnectError] = useState<Error | null>(null)
+  const [isPending, setIsPending] = useState(false)
+
+  const handleConnect = async () => {
+    setIsPending(true)
+    setConnectError(null)
+    try {
+      await connect(config, { connector: injected() })
+    } catch (error) {
+      setConnectError(error as Error)
+    } finally {
+      setIsPending(false)
+    }
+  }
+
+  const handleDisconnect = async () => {
+    await disconnect(config)
+  }
 
   if (!isConnected) {
     return (
@@ -12,7 +31,7 @@ export function Profile() {
         <h2 className="text-xl font-bold mb-4 text-white">Connect Wallet</h2>
         <p className="text-gray-300 mb-4">Connect your wallet to interact with the app</p>
         <button
-          onClick={() => connect({ connector: injected() })}
+          onClick={handleConnect}
           disabled={isPending}
           className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 w-full disabled:opacity-50 disabled:cursor-not-allowed"
         >
@@ -38,7 +57,7 @@ export function Profile() {
       </div>
 
       <button
-        onClick={() => disconnect()}
+        onClick={handleDisconnect}
         className="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 hover:scale-105 active:scale-95 w-full"
       >
         Disconnect Wallet
