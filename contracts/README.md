@@ -64,3 +64,13 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+
+生成随机密钥对
+cast wallet new
+
+查看 ETH 余额
+使用 cast balance 命令。默认返回单位为 Wei。
+bash
+# 查看指定地址余额（默认 Wei）
+cast balance $ADDRESS --rpc-url $RPC_URL
+
